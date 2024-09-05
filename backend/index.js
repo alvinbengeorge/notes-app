@@ -1,8 +1,12 @@
 import Express from "express";
 const app = Express();
 
-app.get("/", () => {
-    return {"message": "hello world"}
+app.use(Express.json());
+
+app.get("/", (req, res) => {
+    res.send({
+        "message": "Hello World"
+    });
 });
 
 app.listen(8000, () => {
