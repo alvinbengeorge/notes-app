@@ -1,8 +1,5 @@
-// src/App.jsx
-
 import React from 'react';
 import Header from './components/Header';
-import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 
 const App = () => {
@@ -19,7 +16,7 @@ const App = () => {
 
       {/* Footer (optional) */}
       <footer className="bg-white shadow-inner p-4 text-center text-gray-600">
-       Made with ❤️ by <a href="https://www.srmkzilla.net/" target='_blank' className="hover:text-orange-500">SRMKZILLA</a>
+       Made with ❤️ by <a href="https://www.srmkzilla.net/" target='_blank' rel='noreferrer' className="hover:text-orange-500">SRMKZILLA</a>
       </footer>
     </div>
   );
