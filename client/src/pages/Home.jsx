@@ -1,5 +1,3 @@
-// src/pages/Home.jsx
-
 import React, { useState, useEffect } from "react";
 import NoteCard from "../components/NoteCard";
 import NoteForm from "../components/NoteForm";
@@ -40,26 +38,25 @@ const Home = () => {
   };
 
   return (
-    <div className="flex">
-      {/* Sidebar */}
-      <div className="hidden md:block">
-        {/* Assuming Sidebar component is used here */}
-      </div>
-
-      {/* Main Content */}
-      <main className="flex-1 p-6">
-        {/* Note Form */}
+    <div className="h-[80vh] flex bg-gray-100">
+      {/* Left Side - Note Form */}
+      <div className="w-1/4 min-w-max bg-white border-r p-6">
+        <h1 className="text-xl font-semibold text-gray-700 mb-4">
+          Add/Edit Note
+        </h1>
         <NoteForm
           addNote={addNote}
           editNote={editExistingNote}
           currentNote={currentNote}
           setCurrentNote={setCurrentNote}
         />
+      </div>
 
-        {/* Notes Grid */}
+      {/* Right Side - Notes Display Area */}
+      <main className="flex-1 p-8">
         {notes.length === 0 ? (
           <p className="text-center text-gray-500">
-            No notes available. Add some!
+            You suck at taking notes brother, you need us
           </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
