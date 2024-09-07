@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import NoteCard from "../components/NoteCard";
 import NoteForm from "../components/NoteForm";
-import { getNotes, saveNotes } from "../utils/localstorage";
+// import { getNotes, saveNotes } from "../utils/localstorage";
+import {
+  createNote,
+  deleteNote,
+  updateNote,
+  getNotes,
+  getNote,
+} from "../utils/api";
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
@@ -25,7 +32,7 @@ const Home = () => {
 
   const editExistingNote = (updatedNote) => {
     const updatedNotes = notes.map((note) =>
-      note.id === updatedNote.id ? updatedNote : note
+      note.id === updatedNote.id ? updatedNote : note,
     );
     setNotes(updatedNotes);
     saveNotes(updatedNotes);

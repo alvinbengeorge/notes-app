@@ -1,6 +1,12 @@
 import { nanoid } from "nanoid";
+import fs from "fs";
 
-const notes = [];
+let notes = [];
+if (fs.existsSync("data.json")) {
+    notes = JSON.parse(fs.readFileSync("data.json"));
+} else {
+    fs.writeFileSync("data.json", JSON.stringify(notes));
+}
 
 const getNotes = (req, res) => {
     res.send({
@@ -32,6 +38,11 @@ const createNote = (req, res) => {
         id: nanoid(),
     };
     notes.push(body);
+    fs.writeFileSync("data.json", JSON.stringify(notes));
+    res.send({
+        data: body,
+        error: {},
+    });
 };
 
 const deleteNote = (req, res) => {
@@ -40,6 +51,7 @@ const deleteNote = (req, res) => {
     if (note) {
         const index = notes.indexOf(note);
         notes.splice(index, 1);
+        fs.writeFileSync("data.json", JSON.stringify(notes));
         res.send(notes);
     } else {
         res.status(404).send({
@@ -65,6 +77,7 @@ const updateNote = (req, res) => {
             ...note,
             ...req.body,
         });
+        fs.writeFileSync("data.json", JSON.stringify(notes));
         res.send(notes);
     }
 };
