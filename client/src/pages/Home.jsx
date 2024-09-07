@@ -1,47 +1,56 @@
 import { useState, useEffect } from "react";
 import NoteCard from "../components/NoteCard";
 import NoteForm from "../components/NoteForm";
-// import { getNotes, saveNotes } from "../utils/localstorage";
-import {
-  createNote,
-  deleteNote,
-  updateNote,
-  getNotes,
-  getNote,
-} from "../utils/api";
+import { createNote, deleteNote, updateNote, getNotes } from "../utils/api";
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState(null);
 
   useEffect(() => {
-    setNotes(getNotes());
+    fetchNotes();
   }, []);
 
-  const addNote = (note) => {
-    const newNotes = [...notes, { ...note, id: Date.now() }];
-    setNotes(newNotes);
-    saveNotes(newNotes);
+  const fetchNotes = async () => {
+    try {
+      const fetchedNotes = await getNotes();
+      setNotes(fetchedNotes);
+    } catch (error) {
+      console.error("Failed to fetch notes:", error);
+    }
   };
 
-  const deleteNote = (id) => {
-    const filteredNotes = notes.filter((note) => note.id !== id);
-    setNotes(filteredNotes);
-    saveNotes(filteredNotes);
+  const addNote = async (note) => {
+    try {
+      const newNote = await createNote(note.title, note.content);
+      setNotes((prevNotes) => [...prevNotes, newNote]);
+      setCurrentNote(null);
+    } catch (error) {
+      console.error("Failed to add note:", error);
+    }
   };
 
-  const editExistingNote = (updatedNote) => {
-    const updatedNotes = notes.map((note) =>
-      note.id === updatedNote.id ? updatedNote : note,
-    );
-    setNotes(updatedNotes);
-    saveNotes(updatedNotes);
+  const handleDelete = async (id) => {
+    try {
+      await deleteNote(id);
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+    } catch (error) {
+      console.error("Failed to delete note:", error);
+    }
   };
 
-  const editNote = (id) => {
-    const noteToEdit = notes.find((note) => note.id === id);
-    setCurrentNote(noteToEdit);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const handleAddNote = (note) => {
+    addNote(note);
+  };
+
+  const handleUpdateNote = async (note) => {
+    try {
+      await updateNote(note.id, note.title, note.content);
+      fetchNotes();
+      setCurrentNote(null);
+    } catch (error) {
+      console.error("Failed to update note:", error);
+    }
   };
 
   return (
@@ -51,8 +60,8 @@ const Home = () => {
           {currentNote ? "Edit Note" : "Add Note"}
         </h1>
         <NoteForm
-          addNote={addNote}
-          editNote={editExistingNote}
+          onAddNote={handleAddNote}
+          onUpdateNote={handleUpdateNote}
           currentNote={currentNote}
           setCurrentNote={setCurrentNote}
         />
@@ -68,8 +77,8 @@ const Home = () => {
               <NoteCard
                 key={note.id}
                 note={note}
-                onDelete={deleteNote}
-                onEdit={editNote}
+                onDelete={handleDelete}
+                onEdit={() => setCurrentNote(note)}
               />
             ))}
           </div>

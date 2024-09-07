@@ -10,7 +10,7 @@ const NoteCard = ({ note, onDelete, onEdit }) => {
         <p className="text-gray-700 text-lg">{note.content}</p>
       </div>
       <div className="flex justify-end space-x-4 mt-6">
-        <Button text="Edit" onClick={() => onEdit(note.id)} type="edit" />
+        <Button text="Edit" onClick={() => onEdit(note)} type="edit" />
         <Button text="Delete" onClick={() => onDelete(note.id)} type="delete" />
       </div>
     </div>
