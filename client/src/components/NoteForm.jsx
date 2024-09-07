@@ -1,6 +1,5 @@
-// src/components/NoteForm.jsx
-
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import Button from "../components/Button";
 
 const NoteForm = ({ addNote, editNote, currentNote, setCurrentNote }) => {
   const [title, setTitle] = useState("");
@@ -37,47 +36,39 @@ const NoteForm = ({ addNote, editNote, currentNote, setCurrentNote }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white shadow rounded-lg p-4 mb-6"
+      className="shadow-xl rounded-lg border-2 border-black p-6 bg-white mb-6 max-w-lg mx-auto"
     >
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
         {currentNote ? "Edit Note" : "Add a New Note"}
       </h2>
-      <div className="mb-4">
-        <label className="block text-gray-700 mb-2">Title</label>
+
+      <div className="mb-6">
+        <label className="block text-gray-600 mb-2 font-medium">Title</label>
         <input
           type="text"
-          className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+          className="w-full border-2 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Note Title"
+          placeholder="Enter note title..."
         />
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 mb-2">Content</label>
+
+      <div className="mb-6">
+        <label className="block text-gray-600 mb-2 font-medium">Content</label>
         <textarea
-          className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+          className="w-full border-2 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="Note Content"
-          rows="4"
+          placeholder="Enter note content..."
+          rows="6"
         ></textarea>
       </div>
-      <div className="flex justify-end space-x-2">
+
+      <div className="flex justify-end gap-4">
         {currentNote && (
-          <button
-            type="button"
-            onClick={handleCancel}
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
-          >
-            Cancel
-          </button>
+          <Button text="Cancel" onClick={() => handleCancel} type="cancel" />
         )}
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          {currentNote ? "Update" : "Add"}
-        </button>
+        <Button text={currentNote ? "Update" : "Add"} type="add" />
       </div>
     </form>
   );

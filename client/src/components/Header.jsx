@@ -1,11 +1,9 @@
-// src/components/Header.jsx
-
-import React from "react";
-
 const Header = () => {
   return (
-    <header className="bg-white shadow-md p-4">
-      <h1 className="text-2xl font-semibold text-gray-800">My Notes</h1>
+    <header className="shadow-md p-4">
+      <h1 className="text-3xl font-bold ">
+        My Notes
+      </h1>
     </header>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import NoteCard from "../components/NoteCard";
 import NoteForm from "../components/NoteForm";
 import { getNotes, saveNotes } from "../utils/localstorage";
@@ -38,11 +38,10 @@ const Home = () => {
   };
 
   return (
-    <div className="h-[80vh] flex bg-gray-100">
-      {/* Left Side - Note Form */}
-      <div className="w-1/4 min-w-max bg-white border-r p-6">
-        <h1 className="text-xl font-semibold text-gray-700 mb-4">
-          Add/Edit Note
+    <div className="h-[80vh] flex">
+      <div className="w-1/4 min-w-max border-r p-6">
+        <h1 className="text-xl font-semibold text-black mb-4">
+          {currentNote ? "Edit Note" : "Add Note"}
         </h1>
         <NoteForm
           addNote={addNote}
@@ -51,13 +50,11 @@ const Home = () => {
           setCurrentNote={setCurrentNote}
         />
       </div>
-
-      {/* Right Side - Notes Display Area */}
       <main className="flex-1 p-8">
         {notes.length === 0 ? (
-          <p className="text-center text-gray-500">
-            You suck at taking notes brother, you need us
-          </p>
+          <h1 className="text-center text-black font-light text-7xl">
+            You suck at taking notes brother, you need us :)
+          </h1>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {notes.map((note) => (
