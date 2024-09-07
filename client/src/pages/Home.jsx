@@ -50,7 +50,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-[80vh] h-full flex">
+    <div className="min-h-[80vh] h-full flex flex-col lg:flex-row">
       <div className="w-1/4 min-w-max border-r p-6">
         <h1 className="text-xl font-semibold text-black mb-4">
           {currentNote ? "Edit Note" : "Add Note"}
