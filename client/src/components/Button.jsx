@@ -1,6 +1,7 @@
 export default function Button({ text, onClick, type }) {
   const colorMapping = {
     add: "bg-[#6A9C89]",
+    update: "bg-[#6A9C89]",
     cancel: "bg-[#A04747]",
     edit: "bg-[#FFDA76]",
     delete: "bg-[#A04747]",

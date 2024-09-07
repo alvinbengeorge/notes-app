@@ -50,8 +50,8 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-[80vh] h-full flex flex-col lg:flex-row">
-      <div className="w-1/4 min-w-max border-r p-6">
+    <div className="min-h-[80vh] h-full flex flex-col items-center lg:items-start justify-center lg:flex-row">
+      <div className="lg:w-1/4 lg:min-w-max lg:border-r p-6">
         <h1 className="text-xl font-semibold text-black mb-4">
           {currentNote ? "Edit Note" : "Add Note"}
         </h1>
@@ -62,7 +62,7 @@ const Home = () => {
           setCurrentNote={setCurrentNote}
         />
       </div>
-      <main className="flex-1 p-8">
+      <div className="flex-1 p-8">
         {notes.length === 0 ? (
           <h1 className="text-center text-black font-light text-7xl">
             You suck at taking notes brother, you need us :)
@@ -79,7 +79,7 @@ const Home = () => {
             ))}
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 };
