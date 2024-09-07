@@ -39,10 +39,6 @@ const Home = () => {
     }
   };
 
-  const handleAddNote = (note) => {
-    addNote(note);
-  };
-
   const handleUpdateNote = async (note) => {
     try {
       await updateNote(note.id, note.title, note.content);
@@ -54,13 +50,13 @@ const Home = () => {
   };
 
   return (
-    <div className="h-[80vh] flex">
+    <div className="min-h-[80vh] h-full flex">
       <div className="w-1/4 min-w-max border-r p-6">
         <h1 className="text-xl font-semibold text-black mb-4">
           {currentNote ? "Edit Note" : "Add Note"}
         </h1>
         <NoteForm
-          onAddNote={handleAddNote}
+          onAddNote={addNote}
           onUpdateNote={handleUpdateNote}
           currentNote={currentNote}
           setCurrentNote={setCurrentNote}
