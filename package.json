@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx concurrently --names \"BACKEND,FRONTEND\" \"cd backend/; npm start;\" \"cd client; npm start\""
+    "start": "npx concurrently --names \"BACKEND,FRONTEND\" \"cd backend/; npm start;\" \"cd client; npm start\"",
+    "install-all": "cd backend/; npm i; cd ../client; npm i"
   },
   "keywords": [],
   "author": "",
