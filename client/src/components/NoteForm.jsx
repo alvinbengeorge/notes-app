@@ -15,21 +15,6 @@ const NoteForm = ({ onAddNote, onUpdateNote, currentNote, setCurrentNote }) => {
     }
   }, [currentNote]);
 
-  const handleAddNote = (e) => {
-    e.preventDefault();
-    if (!title.trim() || !content.trim()) return;
-    onAddNote({ title, content });
-    setTitle("");
-    setContent("");
-  };
-
-  const handleUpdateNote = (e) => {
-    e.preventDefault();
-    if (!title.trim() || !content.trim()) return;
-    onUpdateNote({ id: currentNote.id, title, content });
-    setCurrentNote(null);
-  };
-
   return (
     <form className="bg-white p-6 rounded-lg shadow-md">
       <input
@@ -54,10 +39,20 @@ const NoteForm = ({ onAddNote, onUpdateNote, currentNote, setCurrentNote }) => {
               onClick={() => setCurrentNote(null)}
               type="cancel"
             />
-            <Button text="Update" onClick={handleUpdateNote} type="update" />
+            <Button
+              text="Update"
+              onClick={() =>
+                onUpdateNote({ id: currentNote.id, title, content })
+              }
+              type="update"
+            />
           </>
         ) : (
-          <Button text="Add" onClick={handleAddNote} type="add" />
+          <Button
+            text="Add"
+            onClick={() => onAddNote({ title, content })}
+            type="add"
+          />
         )}
       </div>
     </form>
